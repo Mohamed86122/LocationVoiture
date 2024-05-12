@@ -17,7 +17,7 @@ namespace LocationVoiture.Mappers
             };
 
 
-            if (model.SelectedLocations != null && model.SelectedLocations.Any())
+            /*if (model.SelectedLocations != null && model.SelectedLocations.Any())
             {
                 client.Locations = model.SelectedLocations
                     .Select(locationId => new Location
@@ -26,7 +26,7 @@ namespace LocationVoiture.Mappers
                     })
                     .ToList();
             }
-
+*/
             return client;
         }
     }

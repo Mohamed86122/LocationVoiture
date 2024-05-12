@@ -11,6 +11,6 @@
 
         public string CIN { get; set; }
 
-        public List<int> SelectedLocations { get; set; }
-    }
+/*        public List<int> SelectedLocations { get; set; }
+*/    }
 }

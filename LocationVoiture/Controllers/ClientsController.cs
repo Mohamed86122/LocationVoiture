@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LocationVoiture.Data;
 using LocationVoiture.Models;
+using LocationVoiture.ViewModel;
+using LocationVoiture.Mappers;
 
 namespace LocationVoiture.Controllers
 {
@@ -48,6 +50,7 @@ namespace LocationVoiture.Controllers
         // GET: Clients/Create
         public IActionResult Create()
         {
+            ViewBag.Locations = new SelectList(_context.Locations, "LocationId", "Libelle");
             return View();
         }
 
@@ -56,15 +59,18 @@ namespace LocationVoiture.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientId,Nom,Prenom,Tel,CIN")] Client client)
+        public async Task<IActionResult> Create(ClientVm clientVm)
         {
             if (ModelState.IsValid)
             {
+                ClientMapper clientMapper = new ClientMapper();
+                Client client = clientMapper.AddClientMap(clientVm);
                 _context.Add(client);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(client);
+            ViewBag.Locations = new SelectList(_context.Locations, "LocationId", "Libelle");
+            return View(clientVm);
         }
 
         // GET: Clients/Edit/5

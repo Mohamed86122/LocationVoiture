@@ -4,6 +4,7 @@
     {
         public int LocationId { get; set; }
 
+        public String Libelle{ get; set; }
         public DateTime Date_debut { get; set; }
         public DateTime Date_fin { get; set; }
 
